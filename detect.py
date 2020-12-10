@@ -6,6 +6,7 @@ import numpy as np
 
 
 def detect(path_to_image):
+    pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe'
     output = []
 
     # highlight bold parts of image and erase others
