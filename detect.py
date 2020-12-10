@@ -6,7 +6,7 @@ import numpy as np
 
 
 def detect(path_to_image):
-    pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe'
+    # pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
     output = []
 
     # highlight bold parts of image and erase others
@@ -16,14 +16,14 @@ def detect(path_to_image):
     # Make the letters bolder for easier recognition
     for y in range(img.size[1]):
         for x in range(img.size[0]):
-            if pixdata[x, y] == (128, 128, 128):
+            if pixdata[x, y] == (128, 128, 128, 255) or pixdata[x, y] == (128, 128, 128):
                 pixdata[x, y] = (0, 0, 0)
 
+                pixdata[x + 1, y] = (0, 0, 0)
                 pixdata[x, y + 1] = (0, 0, 0)
                 pixdata[x - 1, y] = (0, 0, 0)
                 pixdata[x, y - 1] = (0, 0, 0)
-                pixdata[x + 1, y] = (0, 0, 0)
-            if pixdata[x, y][2] > 0:
+            elif pixdata[x, y][2] > 0:
                 pixdata[x, y] = (255, 255, 255)
 
 
@@ -63,7 +63,7 @@ def detect(path_to_image):
     img = cv2.imread(path_to_image)
     for b in list(blocks.values())[::-1]:
         # image[y:y+h, x:x+w] and add 5 pixels for each side
-        y1, y2, x1, x2 = b[1] - 5, b[1] + b[3] + 5, b[0] - 5, b[0] + b[2] + 5
+        y1, y2, x1, x2 = b[1] - 5, b[1] - 5 + 30, b[0], b[0] + b[2] + 5
         cropped = img[y1:y2, x1:x2]
 
         # cv2.imshow("cropped", cropped)
@@ -101,9 +101,18 @@ def detect(path_to_image):
         # cv2.imshow("window", window)
         # cv2.waitKey(0)
 
+
+
         # print titles (this way is not so accurate as below; the first line is title)
-        line = pytesseract.image_to_string(cropped, config=config, lang='rus')
-        # print(line.strip())
+        if len(blocks) == 1:
+            line = pytesseract.image_to_string(cropped, config=config, lang='rus')
+        else:
+
+            cropped2 = img[window_coords[0]:y2,
+                       min(x1, window_coords[1] + 20 + (60 * int(bool(output)) or len(blocks) == 1)):window_coords[
+                                                                                                         3] - 120]
+            line = pytesseract.image_to_string(cropped2, config=config, lang='rus')
+        print(line.strip())
         # output.append(line.strip())
 
         # print the whole content of the window
@@ -120,11 +129,12 @@ def detect(path_to_image):
 
 
     # refresh initial image
-    img = cv2.imread(path_to_image)
-    # print all text
-    print('\n\nText from the whole image:')
-    lines = pytesseract.image_to_string(img, config=config, lang='rus').split('\n')
-    print(*[l.strip() for l in lines if l.strip()], sep='\n')
+    # img = cv2.imread(path_to_image)
+    # # print all text
+    # print('\n\nText from the whole image:')
+    # lines = pytesseract.image_to_string(img, config=config, lang='rus').split('\n')
+    # print(*[l.strip() for l in lines if l.strip()], sep='\n')
 
     return json.dumps(output).encode('utf8')
+
 
