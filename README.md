@@ -4,20 +4,20 @@ Text detection on screenshots for 1C app.
 Step by step guide to deploy the application
 -----------------------------------
 1. Open cmd/terminal in forlder and execute: git clone https://github.com/Ugggl/text_detection.git
-1. Move to 'text_detection' folder
+1. Go to 'text_detection' folder:<br />
+cd text_detection
 1. Donwload and install tesseract
     * For Windows:<br />
     https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-v4.1.0.20190314.exe<br />
     During the installation check ‘Additional language data’ and ‘Additional script data’
     * For macOs:<br />
     Execute in terminal: brew install tesseract --all-languages
-1. Create and activate virtualenv in cmd/terminal
-    * For Windows:<br />
-    virtualenv venv<br />
-    \venv\Scripts\activate.bat
-    C:\Python\python.exe -m venv ENV_DIR
-    * For macOs:<br />
+1. Install, create, and activate virtualenv in cmd/terminal<br />
+    pip install virtualenv<br />
     python -m venv venv<br />
+    * For Windows:<br />
+    venv\Scripts\activate.bat
+    * For macOs:<br />
     . ./venv/bin/activate
 1. Install required modules via pip<br />
     pip install -r requirements.txt
