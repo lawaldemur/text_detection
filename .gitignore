@@ -1,5 +1,7 @@
 **/.DS_Store
-venv/
+venv/*
+!venv
 .idea/
-images/*
 __pycache__/
+static/uploads/*
+!static/uploads/

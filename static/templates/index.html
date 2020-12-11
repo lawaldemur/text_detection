@@ -26,11 +26,11 @@
         <input type="file" name="image" id="file_image" />
         <button type="submit">Отправить</button>
     </form>
-    <img src="https://miro.medium.com/max/882/1*9EBHIOzhE1XfMYoKz1JcsQ.gif" alt="loading" id="loading_img" class="hidden">
+    <img src="loading.gif" alt="loading" id="loading_img" class="hidden">
     <div id="result" style="white-space: pre-line"></div>
     <img src="" id="detection_image" width="1280" height="720" style="display:none;">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jquery.min.js"></script>
     <script>
     	$('#form').on('submit', function(event) {
     	    $("#loading_img").removeClass('hidden');
@@ -46,11 +46,7 @@
 	            contentType: false,
 	            processData: false,
 	            success: function(data) {
-	                console.log("success");
-	                console.log(data);
-
 	                var array = JSON.parse(data);
-	                console.log(array)
 
                     $('#result').html('');
                     for (var i = 0; i < array.length; i++) {
@@ -67,7 +63,7 @@
                             filename = filename.substring(1);
                         }
                     }
-                    $("#detection_image").attr("src", "/" + filename).show();
+                    $("#detection_image").attr("src", "/uploads/" + filename).show();
 	            },
 	            error: function(data) {
 	                console.log("error");
