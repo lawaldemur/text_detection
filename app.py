@@ -1,8 +1,5 @@
-import os, time, sched, json, requests, datetime
-from importlib import import_module
-from shutil import copyfile
-from flask import Flask, render_template, Response, request
-from threading import Thread
+import os
+from flask import Flask, render_template, request
 from detect import detect
 
 
