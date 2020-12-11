@@ -11,18 +11,21 @@ Step by step guide to deploy the application
     During the installation check ‘Additional language data’ and ‘Additional script data’
     * For macOs:<br />
     Execute in terminal: brew install tesseract --all-languages
-1. Activate virtualenv in cmd/terminal
+1. Create and activate virtualenv in cmd/terminal
     * For Windows:<br />
-    venv\Scripts\activate
+    virtualenv venv<br />
+    \venv\Scripts\activate.bat
+    C:\Python\python.exe -m venv ENV_DIR
     * For macOs:<br />
+    python -m venv venv<br />
     . ./venv/bin/activate
-1. Install required modules via pip
+1. Install required modules via pip<br />
     pip install -r requirements.txt
 1. Check ip and host of local server in app.py
     * For Windows:<br />
     127.0.0.1:30
     * For macOs:<br />
     0.0.0.0:5000
-1. Only for windows: uncomment the first line of detect functioin of detect.py and change to where tesseract is installed
+1. Only for windows: uncomment the first line of detect functioin of detect.py and change to where tesseract is installed<br />
     pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'.
 1. Execute: python app.py
