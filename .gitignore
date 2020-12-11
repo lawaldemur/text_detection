@@ -1,7 +1,6 @@
 **/.DS_Store
-venv/*
 !venv
 .idea/
 __pycache__/
 static/uploads/*
-!static/uploads/
+!static/uploads/1.png
