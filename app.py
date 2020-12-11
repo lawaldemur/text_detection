@@ -11,7 +11,7 @@ app = Flask(__name__, static_url_path='', static_folder=os.getcwd() + '/static/'
 @app.route('/')
 def index():
     # Video streaming home page.
-    return render_template('/templates/index.html')
+    return render_template('index.html')
 
 
 @app.route('/process', methods=['POST'])
